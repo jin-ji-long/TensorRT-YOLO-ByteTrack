@@ -61,7 +61,7 @@ Windows 下编译需要额外注意环境变量配置：
 
 Path 环境变量应包含：
 
-text
+```text
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\libnvvp
 C:\Program Files\NVIDIA GPU Computing Toolkit\cuDNN\v8.9.7.29\bin
@@ -70,8 +70,9 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\TensorRT\v8.6.1.6\bin
 D:\tensorrt-yolo\install\dir\bin    # 编译生成的 tensorrt_yolo.dll
 D:\tensorrt-yolo\install\dir
 C:\Program Files\CMake\bin
+```
 
-# 错误排查
+**错误排查**
 常见问题 1: CUDA 工具集找不到
 错误信息:
 
@@ -89,7 +90,7 @@ CMake Error: No CUDA toolset found.
 bash
 fatal error C1189: #error: unsupported Microsoft Visual Studio version!
 解决方案:
-参考 此[解决方案](https://blog.csdn.net/lishiyu93/article/details/114599859) 处理 Visual Studio 版本兼容性问题。
+参考此[解决方案](https://blog.csdn.net/lishiyu93/article/details/114599859) 处理 Visual Studio 版本兼容性问题。
 
 ### 3. 使用示例
 
@@ -110,6 +111,7 @@ input_img = cv2.imread("test_image.jpg")
 detection_result = model.predict(input_img)
 ```
 > 3. 处理结果
+```text
 打印detection_result的结果是：
 (
     num=6,
@@ -142,7 +144,7 @@ top: y1 坐标
 right: x2 坐标
 
 bottom: y2 坐标
-
+```
 2. - **目标跟踪**
 ```bash
 from tracker.byte_tracker import BYTETracker
@@ -158,9 +160,13 @@ tracker = BYTETracker(
 )
 ```
 > 2. 更新跟踪器（使用检测结果）
-> dets_np 格式: [x1, y1, x2, y2, score]
-> img_info 为图片宽高信息
+```bash
 track_outputs = tracker.update(dets_np, img_info, img_info)
+```
+> dets_np 格式: [x1, y1, x2, y2, score]
+
+> img_info 为图片宽高信息
+
 
 3. - **如需多线程，对模型进行克隆**
 model_clone = model.clone()
