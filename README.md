@@ -10,8 +10,8 @@ TensorRT-YOLO + ByteTrack 目标跟踪程序
 - **TensorRT**：推荐版本 ≥ 8.6.1
 - **操作系统**：Linux (x86_64 或 arm)（推荐）；Windows 亦可支持
 - **额外插件**：Windows下需要额外安装VisualStudioCommunity以及CMake，linux下需要安装gcc、g++、cmake、make等工具（但一般情况下linux系统自带gcc、g++、cmake、make等工具）
-请遵循以下约束：
->
+
+>- **请遵循以下约束：**
 > 1. 正确安装 CUDA、cuDNN、TensorRT 并配置环境变量；
 > 2. 确保 cuDNN、TensorRT 版本与 CUDA 版本匹配；
 > 3. 避免系统中存在多个版本的 CUDA、cuDNN、TensorRT。
@@ -93,23 +93,23 @@ fatal error C1189: #error: unsupported Microsoft Visual Studio version!
 
 ### 3. 使用示例
 
-1. 目标检测
+1. - **目标检测**
 python
 ```bash
 from tensorrt_yolo.infer import DetectModel, InferOption
 ```
-# 初始化模型
+> 1. 初始化模型
 ```bash
 option = InferOption()
 option.enable_swap_rb()
 model = DetectModel(engine_file="your_engine_file", option=option)
 ```
-# 执行推理
+> 2. 执行推理
 ```bash
 input_img = cv2.imread("test_image.jpg")
 detection_result = model.predict(input_img)
 ```
-# 处理结果
+> 3. 处理结果
 打印detection_result的结果是：
 (
     num=6,
@@ -124,13 +124,30 @@ detection_result = model.predict(input_img)
         Box(left=127.596, top=2.21691, right=403.971, bottom=279.577),
     ]
 )
-num为检测到的数量，classes为检测的类别，scores为检测的置信度，boxes为检测的框，left 对应 x1、top 对应 y1、right 对应 x2、bottom 对应 y21。
-2. 目标跟踪
-python
+输出格式说明
+检测结果 detection_result 包含以下字段:
+
+num: 检测到的目标数量
+
+classes: 类别 ID 列表
+
+scores: 置信度分数列表
+
+boxes: 边界框列表，每个框包含:
+
+left: x1 坐标
+
+top: y1 坐标
+
+right: x2 坐标
+
+bottom: y2 坐标
+
+2. - **目标跟踪**
 ```bash
 from tracker.byte_tracker import BYTETracker
 ```
-# 初始化跟踪器
+> 1. 初始化跟踪器
 ```bash
 tracker = BYTETracker(
     track_thresh=0.5, 
@@ -140,13 +157,12 @@ tracker = BYTETracker(
     frame_rate=30
 )
 ```
-# 更新跟踪器（使用检测结果）
-# dets_np 格式: [x1, y1, x2, y2, score]
-# img_info 为图片宽高信息
+> 2. 更新跟踪器（使用检测结果）
+> dets_np 格式: [x1, y1, x2, y2, score]
+> img_info 为图片宽高信息
 track_outputs = tracker.update(dets_np, img_info, img_info)
-多线程使用
-python
-# 如需多线程，对模型进行克隆
+
+3. - **如需多线程，对模型进行克隆**
 model_clone = model.clone()
 
 
@@ -190,34 +206,6 @@ trtexec \
 
 --fp16: 使用 FP16 精度
 
-输出格式说明
-检测结果 detection_result 包含以下字段:
-
-num: 检测到的目标数量
-
-classes: 类别 ID 列表
-
-scores: 置信度分数列表
-
-boxes: 边界框列表，每个框包含:
-
-left: x1 坐标
-
-top: y1 坐标
-
-right: x2 坐标
-
-bottom: y2 坐标
-
-目录结构
-text
-byte_track_tracker/
-├── tracker/           # 跟踪器实现
-│   ├── byte_tracker.py
-│   └── __init__.py
-├── demo.py           # 使用示例
-└── README.md         # 说明文档
-按照上述步骤，您可以成功编译并使用 TensorRT-YOLO + ByteTrack 目标跟踪系统。
 
 
 
