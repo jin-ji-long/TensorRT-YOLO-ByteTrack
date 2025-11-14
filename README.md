@@ -9,7 +9,7 @@ TensorRT-YOLO + ByteTrack 目标跟踪程序
 - **CUDA**：推荐版本 ≥ 11.0.1
 - **TensorRT**：推荐版本 ≥ 8.6.1
 - **操作系统**：Linux (x86_64 或 arm)（推荐）；Windows 亦可支持
-- **额外插件**：Windows下需要额外安装VisualStudioCommunity以及CMake，linux下需要安装gcc、g++、cmake、make等工具（但一般情况下linux系统自带gcc、g++、cmake、make等工具）
+- **额外插件**：Windows下需要额外安装VisualStudioCommunity以及CMake，linux下需要安装gcc、g++、cmakee（但一般情况下linux系统自带gcc、g++、cmake）
 
 >- **请遵循以下约束：**
 > 1. 正确安装 CUDA、cuDNN、TensorRT 并配置环境变量；
