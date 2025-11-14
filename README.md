@@ -27,32 +27,32 @@ cd TensorRT-YOLO
 # 安装 pybind11 用于生成 Python 绑定
 pip install "pybind11[global]"
 ```
-# 安装 build 工具
+3. - **安装 build 工具**
 ```bash
 pip install --upgrade build
 ```
-# 配置 CMake（替换为你的实际路径）
+4. - **配置 CMake（替换为你的实际路径**
 ```bash
 cmake -S . -B build \
   -D TRT_PATH=/your/tensorrt/dir \
   -D BUILD_PYTHON=ON \
   -D CMAKE_INSTALL_PREFIX=/your/tensorrt-yolo/install/dir
 ```
-# 编译项目
+5. - **编译项目**
 ```bash
 cmake --build build -j$(nproc) --config Release --target install
 ```
-# 构建 Python wheel 包
+6. - **构建 Python wheel 包**
 ```bash 
 python -m build --wheel
 ```
-# 安装生成的 wheel 包
+7. - **安装生成的 wheel 包**
 ```bash 
 pip install dist/tensorrt_yolo-6.*-py3-none-any.whl[export]
 ```
 执行上述指令后，tensorrt-yolo 库将被安装到指定的 CMAKE_INSTALL_PREFIX 路径中。
 
-# 平台特定说明
+8. - **平台特定说明**
 Linux 编译
 Linux 下编译相对简单，按照上述步骤即可完成。
 
