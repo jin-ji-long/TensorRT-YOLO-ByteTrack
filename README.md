@@ -2,11 +2,8 @@ TensorRT-YOLO + ByteTrack 目标跟踪程序
 高性能 YOLO 模型部署框架，基于 TensorRT 加速
 
 项目概述
-本项目实现了一个基于 TensorRT 加速的 YOLO 目标检测器与 ByteTrack 跟踪器结合的视频目标跟踪系统。项目需要编译，编译完毕后可直接通过 Python 调用。
-
-本项目基于 TensorRT-YOLO 项目，专门针对目标检测+追踪功能进行优化，支持目标检测、实例分割、图像分类、姿态识别等多种功能。
-
-
+基于 TensorRT 加速的 YOLO 目标检测器与 ByteTrack 跟踪器结合的视频目标跟踪系统。项目需要编译，编译完毕后可直接通过 Python 调用。
+项目中引用于[TensorRT-YOLO](https://github.com/laugh12321/TensorRT-YOLO?tab=readme-ov-file)
 
 ### 1. 前置依赖
 - **CUDA**：推荐版本 ≥ 11.0.1
